@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personaliza y Regala | Catálogo de muñecos</title>
+<style>
+:root{--pink:#f8dfe2;--pink2:#fff0f1;--rose:#d66f80;--rose-dark:#a94d60;--cream:#fffaf7;--brown:#573c37;--muted:#826c67;--line:#f0d8d7;--white:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--cream);color:var(--brown)}
+header{background:#fffaf8f5;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+.nav{max-width:1160px;margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.brand{font-family:Georgia,serif;font-weight:bold;font-size:1.45rem;color:var(--rose-dark)}.brand small{display:block;font:normal .75rem Arial;color:var(--muted);margin-top:4px}
+nav{display:flex;gap:17px;flex-wrap:wrap}nav a{color:var(--brown);text-decoration:none;font-size:.93rem}nav a:hover{color:var(--rose-dark)}
+.hero{background:linear-gradient(115deg,#fff2ef,#f8dfe2);padding:54px 22px}.hero-inner{max-width:1080px;margin:auto;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:34px}
+.eyebrow{color:var(--rose-dark);font-weight:bold;letter-spacing:1.4px;text-transform:uppercase;font-size:.77rem}
+h1{font: bold clamp(2.3rem,5vw,3.8rem) Georgia,serif;line-height:1.08;margin:12px 0;color:#67473e}.hero p{max-width:560px;line-height:1.75;color:#755b54}
+.btn{display:inline-block;background:var(--rose);color:#fff;text-decoration:none;border:0;border-radius:10px;padding:12px 19px;font-weight:bold;margin-top:10px;cursor:pointer}.btn:hover{background:var(--rose-dark)}
+.hero-photo{height:330px;width:100%;object-fit:cover;border-radius:28px;box-shadow:0 15px 35px #9f586022;border:7px solid #ffffffad}
+section{max-width:1160px;margin:auto;padding:42px 22px}.section-head{text-align:center;margin-bottom:25px}.section-head h2{font: bold 2rem Georgia,serif;margin:0 0 8px}.section-head p{color:var(--muted);margin:0;line-height:1.5}
+.categories{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}.category{background:#fff;border:1px solid var(--line);border-radius:16px;padding:11px;text-align:center;text-decoration:none;color:var(--brown);transition:.2s}.category:hover{transform:translateY(-4px);box-shadow:0 8px 20px #9b64501a}.category img{width:100%;height:105px;object-fit:cover;border-radius:11px;margin-bottom:10px}.category strong{display:block;padding-bottom:5px}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}.toolbar h2{font: bold 1.8rem Georgia,serif;margin:0}.filters{display:flex;gap:10px;flex-wrap:wrap}select,input{border:1px solid #e8cfd0;background:#fff;border-radius:9px;padding:10px;color:var(--brown);font-size:.95rem}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:17px}.product{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 5px 15px #8e4f4f08}.product img{width:100%;height:205px;object-fit:cover;background:var(--pink2)}.product-info{padding:15px;display:flex;flex-direction:column;gap:8px;flex:1}.product h3{font-size:1rem;margin:0}.product p{color:var(--muted);font-size:.88rem;line-height:1.5;margin:0}.price{font-weight:bold;color:var(--rose-dark);margin-top:auto;padding-top:4px}.tag{font-size:.75rem;background:var(--pink2);color:var(--rose-dark);padding:5px 8px;border-radius:20px;align-self:flex-start}.price-note{font-size:.76rem;color:var(--muted);font-weight:normal}
+.about{background:#fff0ee;border-radius:22px;display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:center;padding:28px}.about h2{font: bold 1.8rem Georgia,serif}.about p{line-height:1.7;color:var(--muted)}.about-art{width:100%;height:230px;object-fit:cover;border-radius:16px}
+footer{background:#f7dfe0;margin-top:20px;padding:28px 22px;text-align:center;color:#6c5147}footer p{margin:7px}.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:25px}
+
+.customizer{max-width:900px;margin:auto;background:#fff;border:1px solid var(--line);border-radius:22px;padding:clamp(18px,4vw,32px);box-shadow:0 10px 30px #9f58600d}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.form-grid label{display:flex;flex-direction:column;gap:8px;font-weight:bold;font-size:.92rem;color:var(--brown)}
+.form-grid input,.form-grid select,.form-grid textarea{width:100%;font:normal .95rem Arial;border:1px solid #e8cfd0;border-radius:10px;padding:12px;background:#fffdfc;color:var(--brown)}
+.form-grid textarea{resize:vertical}.full{grid-column:1/-1}.hint{font-size:.8rem;line-height:1.5;color:var(--muted);font-weight:normal!important}
+.form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.btn.secondary{background:#fff0f1;color:var(--rose-dark);border:1px solid var(--line)}
+.preview-wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--pink2);padding:12px;border-radius:12px}.preview-wrap img{max-width:220px;max-height:220px;object-fit:contain;border-radius:10px}.remove-photo{border:0;background:#fff;border-radius:8px;padding:9px;color:var(--rose-dark);cursor:pointer}
+.summary{margin-top:20px;background:#fff6f5;border:1px solid var(--line);padding:18px;border-radius:14px;white-space:pre-wrap;line-height:1.6}.summary h3{margin-top:0}.summary button{margin-top:10px}
+
+@media(max-width:850px){.hero-inner{grid-template-columns:1fr}.hero-photo{height:260px}.categories{grid-template-columns:repeat(3,1fr)}.products{grid-template-columns:repeat(2,1fr)}.about{grid-template-columns:1fr}.about-art{height:200px}}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}.form-grid .full{grid-column:auto}}
+@media(max-width:480px){.nav{justify-content:center}.brand{text-align:center}nav{justify-content:center;gap:12px}.categories{grid-template-columns:repeat(2,1fr)}.products{gap:10px}.product img{height:145px}.product-info{padding:11px}.toolbar h2{font-size:1.5rem}.hero{padding-top:38px}}
+</style>
+</head>
+<body>
+<header><div class="nav">
+  <div class="brand">♡ Personaliza y Regala <small>Detalles tiernos para momentos especiales</small></div>
+  <nav aria-label="Menú principal"><a href="#inicio">Inicio</a><a href="#categorias">Categorías</a><a href="#catalogo">Catálogo</a><a href="#personaliza">Diseña tu muñeco</a><a href="#nosotros">Acerca de</a></nav>
+</div></header>
+<main>
+<section class="hero" id="inicio" style="max-width:none"><div class="hero-inner">
+  <div><div class="eyebrow">Un regalo, mil sonrisas</div><h1>Muñecos hechos para regalar cariño</h1>
+  <p>Descubre muñecos suaves y adorables para cumpleaños, aniversarios y otras ocasiones especiales. Explora las categorías y conoce los modelos de nuestro catálogo.</p>
+  <a class="btn" href="#catalogo">Explorar catálogo ♡</a></div>
+  <img class="hero-photo" src="https://static.wixstatic.com/media/c92c23_5a99372efa2b41c799d86692f1940c31~mv2.jpg/v1/fill/w_1024%2Ch_1008%2Cal_c%2Cq_85%2Cenc_avif%2Cquality_auto/c92c23_5a99372efa2b41c799d86692f1940c31~mv2.jpg" alt="Tres muñecos de peluche en tonos suaves" onerror="this.onerror=null;this.src='https://mikihouse-usa.com/cdn/shop/files/46-1307-498-01-7_46-1306-495-09_dl_1280.jpg?v=1773375578&width=1445'">
+</div></section>
+<section id="categorias"><div class="section-head"><h2>Explora por categorías</h2><p>Encuentra el tipo de muñeco que más te guste.</p></div>
+<div class="categories">
+<a class="category" href="#catalogo" data-cat="Ositos"><img loading="lazy" src="https://images.unsplash.com/photo-1559454403-b8fb88521f11?auto=format&fit=crop&w=500&q=80" alt="Osito de peluche" onerror="this.src='https://static.wixstatic.com/media/c92c23_5a99372efa2b41c799d86692f1940c31~mv2.jpg/v1/fill/w_500,h_400,al_c,q_80/c92c23_5a99372efa2b41c799d86692f1940c31~mv2.jpg'"><strong>Ositos</strong></a>
+<a class="category" href="#catalogo" data-cat="Conejos"><img loading="lazy" src="https://www.unecuillerepourdoudou.com/7146-thickbox_default/peluche-lapin-copains-calins-rose-70cm.jpg" alt="Conejo de peluche"><strong>Conejos</strong></a>
+<a class="category" href="#catalogo" data-cat="Animales"><img loading="lazy" src="https://mikihouse-usa.com/cdn/shop/files/46-1307-498-01-7_46-1306-495-09_dl_1280.jpg?v=1773375578&width=1445" alt="Animalitos de peluche"><strong>Animales</strong></a>
+<a class="category" href="#catalogo" data-cat="Muñecas"><img loading="lazy" src="https://cdns.klimg.com/resized/1200x600/p/headline/nama-boneka-lucu-inspiras-027a15563bcc.jpg" alt="Colección de muñecos suaves"><strong>Muñecas</strong></a>
+<a class="category" href="#catalogo" data-cat="Temáticos"><img loading="lazy" src="https://cdn11.bigcommerce.com/s-84qg5vpfl1/images/stencil/original/products/10904/134987/JG-DB-JCST314_zoom_6__93541.1757948931.jpg?c=2" alt="Muñecos temáticos de peluche"><strong>Temáticos</strong></a>
+</div></section>
+<section id="catalogo"><div class="toolbar"><h2>Catálogo de muñecos</h2><div class="filters">
+<input id="search" type="search" placeholder="Buscar muñeco..." aria-label="Buscar muñeco">
+<select id="category" aria-label="Filtrar por categoría"><option value="Todos">Todas las categorías</option><option>Ositos</option><option>Conejos</option><option>Animales</option><option>Muñecas</option><option>Temáticos</option></select>
+</div></div>
+<div class="products" id="products">
+<article class="product" data-name="Osito clásico" data-cat="Ositos"><img loading="lazy" src="https://static.wixstatic.com/media/c92c23_5a99372efa2b41c799d86692f1940c31~mv2.jpg/v1/fill/w_800,h_700,al_c,q_85/c92c23_5a99372efa2b41c799d86692f1940c31~mv2.jpg" alt="Osito de peluche marrón y beige"><div class="product-info"><span class="tag">Ositos</span><h3>Osito clásico</h3><p>Un muñeco tierno, ideal para regalar en cualquier ocasión.</p><div class="price">Bs. 120 <span class="price-note">(precio de ejemplo)</span></div></div></article>
+<article class="product" data-name="Conejito rosado" data-cat="Conejos"><img loading="lazy" src="https://www.unecuillerepourdoudou.com/7146-thickbox_default/peluche-lapin-copains-calins-rose-70cm.jpg" alt="Conejo de peluche rosado"><div class="product-info"><span class="tag">Conejos</span><h3>Conejito rosado</h3><p>Un muñeco delicado con orejas largas y un estilo dulce.</p><div class="price">Bs. 110 <span class="price-note">(precio de ejemplo)</span></div></div></article>
+<article class="product" data-name="Osito y conejito" data-cat="Animales"><img loading="lazy" src="https://mikihouse-usa.com/cdn/shop/files/46-1307-498-01-7_46-1306-495-09_dl_1280.jpg?v=1773375578&width=1445" alt="Osito y conejito de peluche en tonos crema"><div class="product-info"><span class="tag">Animales</span><h3>Osito y conejito</h3><p>Dos compañeros adorables en tonos suaves para una sorpresa especial.</p><div class="price">Bs. 130 <span class="price-note">(precio de ejemplo)</span></div></div></article>
+<article class="product" data-name="Colección de muñecos" data-cat="Muñecas"><img loading="lazy" src="https://cdns.klimg.com/resized/1200x600/p/headline/nama-boneka-lucu-inspiras-027a15563bcc.jpg" alt="Colección de muñecos de peluche"><div class="product-info"><span class="tag">Muñecas</span><h3>Colección tierna</h3><p>Una selección de muñecos suaves para distintos gustos y edades.</p><div class="price">Bs. 140 <span class="price-note">(precio de ejemplo)</span></div></div></article>
+<article class="product" data-name="Trío de peluches" data-cat="Temáticos"><img loading="lazy" src="https://cdn11.bigcommerce.com/s-84qg5vpfl1/images/stencil/original/products/10904/134987/JG-DB-JCST314_zoom_6__93541.1757948931.jpg?c=2" alt="Tres muñecos de peluche de diferentes animales"><div class="product-info"><span class="tag">Temáticos</span><h3>Trío de peluches</h3><p>Una combinación de animalitos tiernos con distintas texturas.</p><div class="price">Bs. 150 <span class="price-note">(precio de ejemplo)</span></div></div></article>
+<article class="product" data-name="Osito con corazón" data-cat="Ositos"><img loading="lazy" src="https://images.unsplash.com/photo-1559454403-b8fb88521f11?auto=format&fit=crop&w=800&q=80" alt="Osito de peluche para regalar"><div class="product-info"><span class="tag">Ositos</span><h3>Osito para regalar</h3><p>Un detalle clásico para expresar cariño y amistad.</p><div class="price">Bs. 115 <span class="price-note">(precio de ejemplo)</span></div></div></article>
+<article class="product" data-name="Conejito de abrazo" data-cat="Conejos"><img loading="lazy" src="https://down-sg.img.susercontent.com/file/31dc425ae57f7d371eaf387c813cfc94" alt="Conejito blanco y osito beige de peluche"><div class="product-info"><span class="tag">Conejos</span><h3>Conejito de abrazo</h3><p>Un muñeco suave y bonito para una ocasión especial.</p><div class="price">Bs. 105 <span class="price-note">(precio de ejemplo)</span></div></div></article>
+<article class="product" data-name="Amigos de peluche" data-cat="Animales"><img loading="lazy" src="https://parparim-flowers.co.il/cdn/shop/files/IMG_0022_JPG.jpg?v=1775142350&width=1000" alt="Cuatro muñecos de peluche en colores neutros"><div class="product-info"><span class="tag">Animales</span><h3>Amigos de peluche</h3><p>Modelos de animalitos en colores suaves para elegir tu favorito.</p><div class="price">Bs. 125 <span class="price-note">(precio de ejemplo)</span></div></div></article>
+</div><p class="price-note" style="margin-top:16px">Importante: las fotografías son referencias visuales y los precios son ficticios para el proyecto escolar. Puedes reemplazarlos por tus propios productos y precios.</p>
+</section>
+<section id="personaliza">
+<div class="section-head"><h2>Diseña tu muñeco</h2><p>Cuéntanos cómo imaginas tu muñeco y adjunta una foto de referencia si tienes una.</p></div>
+<div class="customizer">
+<form id="designForm">
+<div class="form-grid">
+<label>Nombre de referencia del diseño
+<input name="designName" type="text" placeholder="Ej.: Muñeca de vestido lila">
+</label>
+<label>Tipo de muñeco
+<select name="designType" required><option value="">Selecciona una opción</option><option>Osito</option><option>Conejo</option><option>Animal</option><option>Muñeca</option><option>Personaje temático</option><option>Otro</option></select>
+</label>
+<label>Tamaño aproximado
+<select name="size" required><option value="">Selecciona un tamaño</option><option>Pequeño (15–20 cm)</option><option>Mediano (25–35 cm)</option><option>Grande (40–60 cm)</option><option>Otro / por definir</option></select>
+</label>
+<label>Colores principales
+<input name="colors" type="text" placeholder="Ej.: rosa pastel, blanco y lila">
+</label>
+<label>Material o acabado preferido
+<select name="material"><option>No estoy segura/o</option><option>Tela suave</option><option>Tejido tipo crochet</option><option>Fieltro</option><option>Otro / por conversar</option></select>
+</label>
+<label>¿Quieres agregar un nombre o texto?
+<input name="textDetail" type="text" placeholder="Ej.: nombre bordado o dedicatoria corta">
+</label>
+<label class="full">Describe otros detalles del muñeco
+<textarea name="details" rows="4" placeholder="Ropa, accesorios, peinado, expresión, colores, detalles importantes..."></textarea>
+</label>
+<label class="full">Sube una foto de referencia (opcional)
+<input id="referencePhoto" name="referencePhoto" type="file" accept="image/*">
+<span class="hint">Puedes elegir una imagen desde tu dispositivo. La vista previa solo se muestra en esta página; el formulario no sube la foto a un servidor.</span>
+</label>
+<div class="preview-wrap full" id="previewWrap" hidden><img id="photoPreview" alt="Vista previa de la foto de referencia"><button type="button" class="remove-photo" id="removePhoto">Quitar foto</button></div>
+<label class="full">Notas adicionales
+<textarea name="notes" rows="2" placeholder="Cualquier otra idea que ayude a imaginar tu diseño..."></textarea>
+</label>
+</div>
+<div class="form-actions"><button class="btn" type="submit">Generar resumen del diseño</button><button class="btn secondary" type="reset" id="resetForm">Limpiar formulario</button></div>
+<p class="hint">Esta herramienta es una maqueta para el proyecto escolar. No envía pedidos ni guarda datos en internet. Al generar el resumen podrás copiarlo para conservar tus ideas.</p>
+<div id="designSummary" class="summary" hidden aria-live="polite"></div>
+</form>
+</div>
+</section>
+<section id="nosotros"><div class="about"><div><h2>Un catálogo hecho con cariño ♡</h2><p><strong>Personaliza y Regala</strong> es una página web informativa que organiza muñecos por categorías y muestra fotografías, nombres, descripciones y precios de ejemplo para facilitar la exploración de los productos.</p><p>Esta versión es solo un catálogo: no incluye carrito de compras, pagos ni pedidos en línea.</p></div><img class="about-art" loading="lazy" src="https://static.wixstatic.com/media/c92c23_5a99372efa2b41c799d86692f1940c31~mv2.jpg/v1/fill/w_800,h_700,al_c,q_85/c92c23_5a99372efa2b41c799d86692f1940c31~mv2.jpg" alt="Muñecos de peluche en colores pastel"></div></section>
+</main>
+<footer><p><strong>♡ Personaliza y Regala</strong></p><p>Catálogo digital de muñecos personalizados</p><p>Proyecto escolar · Fotografías de referencia y precios de ejemplo.</p></footer>
+<script>
+const search=document.getElementById('search'),category=document.getElementById('category'),cards=[...document.querySelectorAll('.product')];
+function filterCards(){const q=search.value.toLowerCase().trim(),c=category.value;let count=0;cards.forEach(card=>{const ok=(c==='Todos'||card.dataset.cat===c)&&card.dataset.name.toLowerCase().includes(q);card.style.display=ok?'flex':'none';if(ok)count++});let empty=document.getElementById('empty');if(!count){if(!empty){empty=document.createElement('p');empty.id='empty';empty.className='empty';empty.textContent='No se encontraron muñecos con esa búsqueda.';document.getElementById('products').appendChild(empty)}}else if(empty)empty.remove()}
+search.addEventListener('input',filterCards);category.addEventListener('change',filterCards);
+document.querySelectorAll('.category').forEach(link=>link.addEventListener('click',()=>{category.value=link.dataset.cat;filterCards()}));
+
+const designForm=document.getElementById('designForm'), photoInput=document.getElementById('referencePhoto');
+const previewWrap=document.getElementById('previewWrap'), photoPreview=document.getElementById('photoPreview');
+let photoDataUrl='';
+photoInput.addEventListener('change',()=>{
+ const file=photoInput.files && photoInput.files[0];
+ if(!file){photoDataUrl='';previewWrap.hidden=true;return;}
+ if(!file.type.startsWith('image/')){alert('Selecciona un archivo de imagen.');photoInput.value='';return;}
+ const reader=new FileReader();
+ reader.onload=()=>{photoDataUrl=reader.result;photoPreview.src=photoDataUrl;previewWrap.hidden=false;};
+ reader.readAsDataURL(file);
+});
+document.getElementById('removePhoto').addEventListener('click',()=>{photoInput.value='';photoDataUrl='';photoPreview.removeAttribute('src');previewWrap.hidden=true;});
+designForm.addEventListener('reset',()=>{setTimeout(()=>{photoDataUrl='';previewWrap.hidden=true;photoPreview.removeAttribute('src');document.getElementById('designSummary').hidden=true;},0);});
+designForm.addEventListener('submit',e=>{
+ e.preventDefault();
+ const data=new FormData(designForm);
+ const fields=[
+ ['Nombre de referencia',data.get('designName')||'No indicado'],
+ ['Tipo de muñeco',data.get('designType')||'No indicado'],
+ ['Tamaño',data.get('size')||'No indicado'],
+ ['Colores',data.get('colors')||'No indicados'],
+ ['Material o acabado',data.get('material')||'No indicado'],
+ ['Nombre o texto',data.get('textDetail')||'No indicado'],
+ ['Detalles',data.get('details')||'Sin detalles adicionales'],
+ ['Foto de referencia',photoDataUrl?'Se seleccionó una foto en esta sesión':'No se adjuntó foto'],
+ ['Notas',data.get('notes')||'Sin notas']
+ ];
+ const summary=document.getElementById('designSummary');
+ summary.innerHTML='<h3>Resumen de tu diseño</h3><p>Revisa estos datos. Puedes copiarlos para guardarlos junto con tu proyecto.</p><div id="summaryText"></div><button type="button" class="btn" id="copySummary">Copiar resumen</button>';
+ document.getElementById('summaryText').textContent=fields.map(([k,v])=>k+': '+v).join('\\n');
+ summary.hidden=false;
+ document.getElementById('copySummary').addEventListener('click',async()=>{
+   const text=fields.map(([k,v])=>k+': '+v).join('\\n');
+   try{await navigator.clipboard.writeText(text);document.getElementById('copySummary').textContent='Resumen copiado';}
+   catch(err){const ta=document.createElement('textarea');ta.value=text;summary.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();document.getElementById('copySummary').textContent='Resumen copiado';}
+ });
+});
+</script>
+</body></html>
